@@ -24,4 +24,33 @@ class UsersController extends Controller
        })->get();
         return view('participants',compact('participants'));
    }
+
+   public function getGuests(){
+
+        $guests = User::whereHas('role', function($query) {
+        $query->where('id', 4);
+        })->get();
+
+        $sum = User::whereHas('role', function($query) {
+        $query->where('id', 4);
+        })->count();
+
+    return view('guests',compact('guests'))->with('sumGuests',$sum);
+
+}
+
+   public function delete($id){
+     User::find($id)-> delete();
+     return redirect(route('organizers'))->with('successMsg', 'User Successfully Deleted');
+   }
+
+   public function update($id)
+    {
+        $user = User::find($id);
+        $user->role_id = 3;
+        $user->update();
+        return redirect(route('participants'))->with('successMsg', 'Guest Successfully Approved');
+    }
+
+
 }

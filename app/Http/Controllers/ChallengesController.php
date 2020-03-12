@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -10,8 +11,11 @@ class ChallengesController extends Controller
 {
 
     public function index()
-    {
-        return view('welcome');
+    {    $sum = User::whereHas('role', function($query) {
+        $query->where('id', 4);
+    })->count();
+
+        return view('welcome')->with('sumGuests',$sum);
     }
 
 
@@ -55,20 +59,36 @@ class ChallengesController extends Controller
 
     public function show($id)
     {
-        //
+        $challenge = Challenge::find($id);
+        return view('participate',compact('challenge'));
     }
 
 
     public function edit($id)
     {
-        //
+        $challenge = Challenge::find($id);
+ 	return view('editChallenge',compact('challenge'));
     }
 
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function update(Request $request, $id){
+        $this->validate($request,[
+            'name' => 'required',
+            'description' => 'required',
+            'startDate' => 'required',
+            'endDate' => 'required'
+
+               ]);
+
+        $chall = Challenge::find($id);
+        $chall->name = $request->name;
+        $chall->description = $request->description;
+        $chall->startDate = $request->startDate;
+        $chall->endDate = $request->endDate;
+        $chall->save();
+        return redirect(route('home'))->with('successMsg','Challenge Successfully Updated');
+
+       }
 
 
     public function destroy($id)

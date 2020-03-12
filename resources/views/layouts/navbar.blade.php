@@ -12,21 +12,30 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url ('/challenges')}}">Challenges</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url ('/createChallenge')}}">Add Challenge</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Users
-        </a>
-        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href="{{ url ('/organizers')}}">Organizers</a>
-          <a class="dropdown-item" href="{{ url ('/participants')}}">Participants </a>
-        </div>
-      </li>
+
+      @if (Auth::check() && (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 ||  Auth::user()->role_id == 3))
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url ('/challenges')}}">Challenges</a>
+        </li>
+        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 )
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url ('/createChallenge')}}">Add Challenge</a>
+        </li>
+        @if (Auth::user()->role_id == 1)
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Users
+            </a>
+            <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+            <a class="dropdown-item" href="{{ url ('/organizers')}}">Organizers</a>
+            <a class="dropdown-item" href="{{ url ('/participants')}}">Participants </a>
+            <a class="dropdown-item" href="{{ url ('/guests')}}">Guests </a>
+            </div>
+        </li>
+        @endif
+        @endif
+        @endif
     </ul>
 
     @guest
@@ -39,6 +48,15 @@
         </li>
     @endif
 @else
+    @if (Auth::user()->role_id == 1)
+    <li class="nav-item">
+        <a style="color:white" class="nav-link" href="/guests" >
+        <i class="fa fa-bell">
+            <span class="badge badge-info">11</span>
+        </i>
+        </a>
+    </li>
+    @endif
     <li>
         <a style="color:white" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">
             <i class="fas fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>

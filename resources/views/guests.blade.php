@@ -17,7 +17,7 @@
         </button>
       </div>
 
-      <a  class="white-text">List of Organizers</a>
+      <a  class="white-text">List of Guests</a>
 
       <div>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
@@ -75,63 +75,68 @@
           <!--Table body-->
           <tbody>
 
-              @foreach ($organizers as $organizer)
+              @foreach ($guests as $guest)
             <tr>
               <th scope="row">
                 {{-- <input class="form-check-input" type="checkbox" id="checkbox1">
                 <label class="form-check-label" for="checkbox1" class="label-table"></label> --}}
               </th>
-              <td>{{$organizer->id}}</td>
-               <td>{{$organizer->name}}</td>
-              <td>{{$organizer->username}}</td>
-              <td>{{$organizer->email}}</td>
-              <td>{{$organizer->created_at}}</td>
-              <td><button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#centralModalDanger"  style=" background-image:linear-gradient(to left, #B02E0C, #EB4511)">
-                <i class="far fa-trash-alt mt-0"></i>
-              </button></td>
+              <td>{{$guest->id}}</td>
+               <td>{{$guest->name}}</td>
+              <td>{{$guest->username}}</td>
+              <td>{{$guest->email}}</td>
+              <td>{{$guest->created_at}}</td>
+
+              <td>
+                <form action="{{ route('approve', $guest->id) }}" method="POST" id="approve-form-{{$guest->id }}">
+                    {{ csrf_field() }}
+                  <button   class="btn btn-outline-white btn-rounded px-4" style="background-image:linear-gradient(to left, #06BCFB, #06BCFB)" >Approve
+                  </button>
+                </form>
+             </td>
+
             </tr>
 
-              <!-- Central Modal Medium Warning -->
-  <div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-danger" role="document">
-    <!--Content-->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header">
-        <p class="heading lead">Delete Organizer</p>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
-      </div>
 
-      <!--Body-->
-      <div class="modal-body">
-        <div class="text-center">
-          {{-- <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i> --}}
-          <p> Are you sure you want to delete this organizer , Admin ?</p>
-        </div>
-      </div>
+            <!-- Central Modal Medium Success -->
+ <div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-notify modal-warning" role="document">
+   <!--Content-->
+   <div class="modal-content">
+     <!--Header-->
+     <div class="modal-header">
+       <p class="heading lead"> Approve <b>{{$guest->name}}</b> </p>
 
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">No</a>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true" class="white-text">&times;</span>
+       </button>
+     </div>
 
-        <form  action="{{route('delete',$organizer->id)}}"  id="delete-form-{{$organizer->id }}" method="POST>
+     <!--Body-->
+     <div class="modal-body">
+       <div class="text-center">
+         <i class="fas fa-question fa-4x mb-3 animated rotateIn"></i>
+         <p> Are you sure you want to approve <b>{{$guest->name}}</b> so he/she becomes able to take part in challenges ?</p>
+       </div>
+     </div>
+
+     <!--Footer-->
+     <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">No</a>
+
+        <form action="{{ route('approve', $guest->id) }}" method="POST" id="approve-form-{{$guest->id }}">
             {{ csrf_field() }}
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
+            <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">Yes, Approve </a>
+        </form>
 
-        {{-- <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Yes, Delete</a> --}}
-
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
+     </div>
+   </div>
+   <!--/.Content-->
+ </div>
 </div>
-<!-- Central Modal Medium Warning-->
+<!-- Central Modal Medium Success-->
             @endforeach
 
           </tbody>
@@ -143,6 +148,13 @@
     </div>
 
   </div>
+
+
+  @if (session('successMsg'))
+  <div class="alert alert-success" role="alert">
+      {{ session('successMsg') }}
+  </div>
+@endif
 
   <!-- Table with panel -->
   @endsection

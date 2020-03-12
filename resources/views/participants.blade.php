@@ -10,10 +10,8 @@
 
       <div>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-          <i class="fas fa-th-large mt-0"></i>
         </button>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-          <i class="fas fa-columns mt-0"></i>
         </button>
       </div>
 
@@ -21,13 +19,10 @@
 
       <div>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-          <i class="fas fa-pencil-alt mt-0"></i>
         </button>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-          <i class="far fa-trash-alt mt-0"></i>
         </button>
         <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-          <i class="fas fa-info-circle mt-0"></i>
         </button>
       </div>
 
@@ -94,6 +89,14 @@
     </div>
 
   </div>
+  <br>
+  <br>
+
+  @if (session('successMsg'))
+  <div class="alert alert-success" role="alert">
+      {{ session('successMsg') }}
+  </div>
+@endif
 
   <!-- Table with panel -->
   @endsection

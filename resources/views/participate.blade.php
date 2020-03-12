@@ -126,22 +126,40 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h3 class="register-heading">Challenge Title</h3>
-                                <div class="row register-form">
-                                  <h4> Challenge Number :</h4>
-                                  <h4> Challenge Title :</h4>
-                                  <h4> Challenge Deadline :</h4>
+                                <h1 class="register-heading">{{$challenge->name}}</h1><br><br>
+                                <div class=" register-form">
+                                    <div class="row">
+                                        <div class="col">   <h4> Challenge Number :</h4></div>
+                                        <div class="col">   <h4> {{$challenge->id}} </h4></div>
+                                    </div><br><br>
+                                    <div class="row">
+                                        <div class="col">   <h4> Start Date :</h4></div>
+                                        <div class="col">   <h4> {{$challenge->startDate}} </h4></div>
+                                    </div><br><br>
+                                    <div class="row">
+                                        <div class="col">   <h4> Deadline :</h4></div>
+                                        <div class="col">   <h4> {{$challenge->endDate}} </h4></div>
+                                    </div><br><br>
+                                    <div class="row">
+                                        <div class="col">   <h4> Status :</h4></div>
+                                        <div class="col">   <h4> {{$challenge->status}} </h4></div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <h3  class="register-heading">Submit Yor Code !</h3>
                                 <div class="row register-form">
                                     <textarea class="form-control rounded-0"  rows="11" name="code" ></textarea>
                                     <div class="col-md-6" >
+                                        {{-- <form action="{{ route('participate') }}" method="POST">
+                                            {{ csrf_field() }} --}}
                                         <input type="submit" class="btnRegister"  value="Submit"/>
+                                    {{-- </form> --}}
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

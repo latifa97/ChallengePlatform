@@ -17,7 +17,7 @@ class OrganizerMiddleware
     public function handle($request, Closure $next)
     {
 
-        if( Auth::check() && auth()->user()->role == 2){
+        if( Auth::check() && Auth::user()->role_id == 2){
             return $next($request);
             }else{
                 return redirect()->route('login');

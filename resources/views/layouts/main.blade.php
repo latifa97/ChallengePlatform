@@ -19,11 +19,11 @@
 </head>
 
 <body>
- 
+
   <!-- Start your project here-->
-  
+
   @include('layouts.navbar')
-  
+
   @yield('content')
 
   @include('layouts.footer')

@@ -18,24 +18,32 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ChallengesController@index')->name('home');
 
+
 Route::get('/createChallenge', 'ChallengesController@create')->name('create');
 
 Route::post('/createChallenge', 'ChallengesController@store')->name('store');
 
 Route::get('/challenges', 'ChallengesController@getChallenges')->name('challenges');
 
-Route::any('/delete/{id}', 'ChallengesController@delete')->name('delete');
+Route::any('/deleteChallenge/{id}', 'ChallengesController@delete')->name('deleteChallenge');
+Route::get('/edit/{id}', 'ChallengesController@edit')->name('edit');
+Route::post('/update/{id}', 'ChallengesController@update')->name('update');
 
+Route::get('/participate/{id}', 'ChallengesController@show')->name('show');
 
-Route::get('/participate',  function () {
-    return view('participate');
-});
+Route::post('/approve/{id}', 'UsersController@update')->name('approve');
+
+// Route::get('/edit',  function () {
+//     return view('editChallenge');
+// });
 
 Route::get('/organizers', 'UsersController@getOrganizers')->name('organizers');
 Route::get('/participants', 'UsersController@getParticipants')->name('participants');
+Route::get('/guests', 'UsersController@getGuests')->name('guests');
+Route::any('/delete/{id}', 'UsersController@delete')->name('delete');
 
 
-
+Route::post('/participate', 'PartipationController@store')->name('participate');
 
 Auth::routes();
 

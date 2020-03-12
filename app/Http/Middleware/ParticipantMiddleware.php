@@ -16,7 +16,7 @@ class ParticipantMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::check() && auth()->user()->role == 3){
+        if( Auth::check() && Auth::user()->role_id == 3){
             return $next($request);
             }else{
                 return redirect()->route('login');

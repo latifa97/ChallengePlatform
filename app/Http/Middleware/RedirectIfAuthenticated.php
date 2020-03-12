@@ -18,13 +18,13 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && auth()->user()->role == 1) {
+        if (Auth::guard($guard)->check() && Auth::user()->role_id == 1) {
             return redirect()->route('admin.dashboard');
         }
-        elseif(Auth::guard($guard)->check() && auth()->user()->role == 2){
+        elseif(Auth::guard($guard)->check() && Auth::user()->role_id == 2){
             return redirect()->route('organizer.dashboard');
         }
-        elseif(Auth::guard($guard)->check() && auth()->user()->role == 3){
+        elseif(Auth::guard($guard)->check() && Auth::user()->role_id == 3){
             return redirect()->route('participant.dashboard');
         }
         else{

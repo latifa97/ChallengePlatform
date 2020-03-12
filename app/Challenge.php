@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Challenge extends Model
 {
-    protected $fillable = [
-        'name',
-        'description',
-        'status' ,
-        'startDate',
-        'endDate'      
-    ];
+    public function participation(){
+        return $this->belongsTo('App\Participation');
+    }
 }
