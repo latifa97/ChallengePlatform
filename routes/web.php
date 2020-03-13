@@ -33,6 +33,10 @@ Route::get('/participate/{id}', 'ChallengesController@show')->name('show');
 
 Route::post('/approve/{id}', 'UsersController@update')->name('approve');
 
+Route::get('/viewCode/{idChallenge}', 'PartipationController@viewCode')->name('viewCode');
+Route::post('/winner/{id}', 'PartipationController@decideWinner')->name('decideWinner');
+Route::get('/winners', 'PartipationController@getWinners')->name('getWinners');
+
 // Route::get('/edit',  function () {
 //     return view('editChallenge');
 // });
@@ -41,9 +45,10 @@ Route::get('/organizers', 'UsersController@getOrganizers')->name('organizers');
 Route::get('/participants', 'UsersController@getParticipants')->name('participants');
 Route::get('/guests', 'UsersController@getGuests')->name('guests');
 Route::any('/delete/{id}', 'UsersController@delete')->name('delete');
+Route::any('/deleteParticipant/{id}', 'UsersController@deleteParticipant')->name('deleteParticipant');
 
 
-Route::post('/participate', 'PartipationController@store')->name('participate');
+Route::post('/participate/{idUser}/{idChallenge}', 'PartipationController@store')->name('participate');
 
 Auth::routes();
 

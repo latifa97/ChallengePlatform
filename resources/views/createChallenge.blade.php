@@ -19,8 +19,8 @@
         <p class="h4 mb-4">Add New Challenge !</p>
         <input type="text" id="defaultContactFormName" class="form-control mb-4" name="name" placeholder="Challenge Name">
 
-        <input class="form-control mb-4" name="startDate" placeholder="Start Date">
-        <input class="form-control mb-4" name="endDate" placeholder="End Date">
+        <input type="date" class="form-control mb-4" name="startDate" placeholder="Start Date">
+        <input type="date" class="form-control mb-4" name="endDate" placeholder="End Date">
 
         <div class="form-group">
             <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="9" name="description" placeholder="Description"></textarea>

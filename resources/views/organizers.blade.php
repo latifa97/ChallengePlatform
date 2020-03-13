@@ -52,11 +52,6 @@
                 </a>
               </th>
               <th class="th-lg">
-                <a href="">Username
-                  <i class="fas fa-sort ml-1"></i>
-                </a>
-              </th>
-              <th class="th-lg">
                 <a href="">Email
                   <i class="fas fa-sort ml-1"></i>
                 </a>
@@ -83,7 +78,6 @@
               </th>
               <td>{{$organizer->id}}</td>
                <td>{{$organizer->name}}</td>
-              <td>{{$organizer->username}}</td>
               <td>{{$organizer->email}}</td>
               <td>{{$organizer->created_at}}</td>
               <td><button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#centralModalDanger"  style=" background-image:linear-gradient(to left, #B02E0C, #EB4511)">

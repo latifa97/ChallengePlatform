@@ -52,11 +52,6 @@
                 </a>
               </th>
               <th class="th-lg">
-                <a href="">Username
-                  <i class="fas fa-sort ml-1"></i>
-                </a>
-              </th>
-              <th class="th-lg">
                 <a href="">Email
                   <i class="fas fa-sort ml-1"></i>
                 </a>
@@ -83,7 +78,6 @@
               </th>
               <td>{{$guest->id}}</td>
                <td>{{$guest->name}}</td>
-              <td>{{$guest->username}}</td>
               <td>{{$guest->email}}</td>
               <td>{{$guest->created_at}}</td>
 
@@ -150,11 +144,7 @@
   </div>
 
 
-  @if (session('successMsg'))
-  <div class="alert alert-success" role="alert">
-      {{ session('successMsg') }}
-  </div>
-@endif
+
 
   <!-- Table with panel -->
   @endsection

@@ -18,10 +18,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ url ('/challenges')}}">Challenges</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url ('/winners')}}">Winners</a>
+        </li>
         @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 )
         <li class="nav-item">
             <a class="nav-link" href="{{ url ('/createChallenge')}}">Add Challenge</a>
         </li>
+
         @if (Auth::user()->role_id == 1)
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
@@ -52,7 +56,7 @@
     <li class="nav-item">
         <a style="color:white" class="nav-link" href="/guests" >
         <i class="fa fa-bell">
-            <span class="badge badge-info">11</span>
+        <span class="badge badge-info">{{$sumGuests}}</span>
         </i>
         </a>
     </li>

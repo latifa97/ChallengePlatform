@@ -105,6 +105,12 @@
     margin-bottom: -15%;
     color: #495057;
 }
+.customcar{
+    color: black;
+    -webkit-text-fill-color: white;
+                                          -webkit-text-stroke-width: 1px;
+                                            -webkit-text-stroke-color: black;
+}
  </style>
 <div class=" register">
 
@@ -129,34 +135,51 @@
                                 <h1 class="register-heading">{{$challenge->name}}</h1><br><br>
                                 <div class=" register-form">
                                     <div class="row">
-                                        <div class="col">   <h4> Challenge Number :</h4></div>
-                                        <div class="col">   <h4> {{$challenge->id}} </h4></div>
+                                        <div class="col">    <h4 >  Challenge Number :</h4></div>
+                                        <div class="col">   <h4 > {{$challenge->id}} </h4></div>
                                     </div><br><br>
                                     <div class="row">
-                                        <div class="col">   <h4> Start Date :</h4></div>
-                                        <div class="col">   <h4> {{$challenge->startDate}} </h4></div>
+                                        <div class="col">    <h4 >  Start Date :</h4></div>
+                                        <div class="col">    <h4 > {{$challenge->startDate}} </h4></div>
                                     </div><br><br>
                                     <div class="row">
-                                        <div class="col">   <h4> Deadline :</h4></div>
-                                        <div class="col">   <h4> {{$challenge->endDate}} </h4></div>
+                                        <div class="col">   <h4 >  Deadline :</h4></div>
+                                        <div class="col">    <h4 > {{$challenge->endDate}} </h4></div>
                                     </div><br><br>
                                     <div class="row">
-                                        <div class="col">   <h4> Status :</h4></div>
-                                        <div class="col">   <h4> {{$challenge->status}} </h4></div>
+                                        <div class="col">    <h4 > Status :</h4></div>
+                                        {{-- @if ({{$today}} <=> {{$challenge->endDate}} == -1) --}}
+                                        <div class="col">   <h4 style="
+                                            -webkit-text-fill-color: #00B712;
+                                          -webkit-text-stroke-width: 1.5px;
+                                            -webkit-text-stroke-color: #5AFF15;"> {{$challenge->status}} </h4>
+                                        </div>
+                                        {{-- @else
+                                        <div class="col">   <h4 style="
+                                            -webkit-text-fill-color: red;
+                                          -webkit-text-stroke-width: 1.5px;
+                                            -webkit-text-stroke-color: red;"> Closed </h4>
+                                        </div>
+                                        @endif --}}
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <h3  class="register-heading">Submit Yor Code !</h3>
-                                <div class="row register-form">
-                                    <textarea class="form-control rounded-0"  rows="11" name="code" ></textarea>
-                                    <div class="col-md-6" >
-                                        {{-- <form action="{{ route('participate') }}" method="POST">
-                                            {{ csrf_field() }} --}}
-                                        <input type="submit" class="btnRegister"  value="Submit"/>
-                                    {{-- </form> --}}
+                                <form action="{{ route('participate',['idUser'=>Auth::user()->id,'idChallenge'=> $challenge->id])}}" method="post">
+                                    {{ csrf_field() }}
+                                    @method('POST')
+                                     <div class="row register-form">
+                                    <textarea class="form-control rounded-0"  placeholder="Submit your code here and win the challenge ! " rows="11" name="code" ></textarea>
+
+                                     <div class="col-md-6" style="margin-left:15%" >
+                                     <input type="submit"  class="btnRegister"  value="Submit"/>
+                                     </div>
                                     </div>
+                                </form>
+
                                 </div>
                             </div>
 

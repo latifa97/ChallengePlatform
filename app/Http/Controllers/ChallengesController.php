@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Challenge;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -60,6 +61,7 @@ class ChallengesController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
+
         return view('participate',compact('challenge'));
     }
 

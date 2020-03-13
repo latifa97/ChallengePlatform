@@ -31,18 +31,18 @@ class UsersController extends Controller
         $query->where('id', 4);
         })->get();
 
-        $sum = User::whereHas('role', function($query) {
-        $query->where('id', 4);
-        })->count();
-
-    return view('guests',compact('guests'))->with('sumGuests',$sum);
+    return view('guests',compact('guests'));
 
 }
 
    public function delete($id){
      User::find($id)-> delete();
-     return redirect(route('organizers'))->with('successMsg', 'User Successfully Deleted');
+     return redirect(route('organizers'))->with('successMsg', 'Organizer Successfully Deleted');
    }
+   public function deleteParticipant($id){
+    User::find($id)-> delete();
+    return redirect(route('participants'))->with('successMsg', 'Participant Successfully Deleted');
+  }
 
    public function update($id)
     {

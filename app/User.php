@@ -42,6 +42,6 @@ class User extends Authenticatable
     }
 
     public function participation(){
-        return $this->belongsTo('App\Participation');
+        return $this->belongsTo('App\Participation', 'user_id');
     }
 }

@@ -41,12 +41,12 @@
               <th>
               </th>
               <th class="th-lg">
-                <a>Name
+                <a>Identifier
                   <i class="fas fa-sort ml-1"></i>
                 </a>
               </th>
               <th class="th-lg">
-                <a href="">Username
+                <a href="">Name
                   <i class="fas fa-sort ml-1"></i>
                 </a>
               </th>
@@ -60,6 +60,7 @@
                   <i class="fas fa-sort ml-1"></i>
                 </a>
               </th>
+              <th class="th-lg"></th>
             </tr>
           </thead>
           <!--Table head-->
@@ -70,13 +71,18 @@
               @foreach ($participants as $participant)
             <tr>
               <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkbox1">
-                <label class="form-check-label" for="checkbox1" class="label-table"></label>
               </th>
-               <td>{{$participant->name}}</td>
-              <td>{{$participant->username}}</td>
+               <td>{{$participant->id}}</td>
+              <td>{{$participant->name}}</td>
               <td>{{$participant->email}}</td>
               <td>{{$participant->created_at}}</td>
+              <td>
+                <form  action="{{route('deleteParticipant',$participant->id)}}"  id="delete-form-{{$participant->id }}" method="POST>
+                    {{ csrf_field() }}
+                  <button type="submit" class="btn btn-outline-white btn-rounded btn-sm px-2"   style=" background-image:linear-gradient(to left, #B02E0C, #EB4511)">
+                <i class="far fa-trash-alt mt-0"></i>
+                 </button>
+                </form></td>
             </tr>
             @endforeach
 
@@ -92,11 +98,13 @@
   <br>
   <br>
 
+  <div style="text-align: center">
   @if (session('successMsg'))
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success" role="alert" style="width:50%">
       {{ session('successMsg') }}
   </div>
 @endif
+  </div>
 
   <!-- Table with panel -->
   @endsection

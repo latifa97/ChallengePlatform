@@ -11,7 +11,7 @@
             <div class="col card " style="height:400px; length:300px; margin-right:30px">
 
                 <!-- Card image -->
-                <div class="view view-cascade gradient-card-header " style="background:-webkit-linear-gradient(left, #3931af, #00c6ff);height:100px; length:300px">
+                <div style="background:-webkit-linear-gradient(left, #3931af, #00c6ff);height:100%; length:300px" class="view view-cascade gradient-card-header " >
 
                 <!-- Title -->
                 <h2 class="card-header-title mb-3" style="color:white">{{$chall->name}}</h2>
@@ -32,9 +32,9 @@
                     </a>
                     @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 )
                     <hr class="my-4">
-                    <button type="button" class="btn btn-outline-white btn-rounded  px-3" style="background:-webkit-linear-gradient(right, #FFDD00, #FBB034)">
+                    <a  type="button" class="btn btn-outline-white btn-rounded  px-3"  href="{{ route('viewCode',  $chall->id) }}" style="background:-webkit-linear-gradient(right, #FFDD00, #FBB034)">
                         <i class="fas fa-th-large mt-0"></i>
-                      </button>
+                    </a>
                     <a type="button" class="btn btn-outline-white btn-rounded  px-3"  href="{{ route('edit', $chall->id) }}" style="background:-webkit-linear-gradient(left, #00B712, #5AFF15)">
                         <i class="fas fa-pencil-alt mt-0"></i>
                     </a>
@@ -81,7 +81,7 @@
                         <form  action="{{route('deleteChallenge',$chall->id)}}" id="delete-form-{{$chall->id }}" method="POST>
                                 {{ csrf_field() }}
                                  @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                 <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
 
                         {{-- <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Yes, Delete</a> --}}
@@ -94,12 +94,13 @@
             <!-- Central Modal Medium Warning-->
         @endforeach
     </div>
-
+    <div style="text-align: center">
         @if (session('successMsg'))
                 <div class="alert alert-success" role="alert">
                     {{ session('successMsg') }}
                 </div>
          @endif
+    </div>
 
 
 
